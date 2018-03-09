@@ -5,9 +5,9 @@ import json
 FINAL_OUTPUT_FILE = "final_output.txt"
 TONE_FILE = "tone_output.txt"
 
-#data = speech_google.main()
+data = speech_google.main()
 
-data = '''Welcome to the IBM Hackathon hosted in IIIT Jabalpur and this is your host joining you to give live updates about the ongoings here. The participants here are looking very excited about the contest.'''
+#data = '''Welcome to the IBM Hackathon hosted in IIIT Jabalpur and this is your host joining you to give live updates about the ongoings here. The participants here are looking very #excited about the contest.'''
 
 print("\n\nFinal Output: \""+data + "\"\n\n")
 file = open(FINAL_OUTPUT_FILE, "w")
