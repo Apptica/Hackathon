@@ -31,7 +31,7 @@ from __future__ import division
 import re
 import sys
 import os
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="auth.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="speech_tone/auth.json"
 from google.cloud import speech
 from google.cloud.speech import enums
 from google.cloud.speech import types
