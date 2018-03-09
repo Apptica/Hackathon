@@ -68,19 +68,24 @@ class Ui_stream(QtGui.QMainWindow):
         self.centralwidget = QtGui.QWidget(stream)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         
-        self.convert_button = QtGui.QPushButton(self.centralwidget)
-        self.convert_button.setGeometry(QtCore.QRect(260, 330, 88, 27))
+        self.convert_button = QtGui.QPushButton(self.centralwidget)#start button
+        self.convert_button.setGeometry(QtCore.QRect(260, 180, 88, 27))
         self.convert_button.setObjectName(_fromUtf8("convert_button"))
         
-        self.realtime_output = QtGui.QTextEdit(self.centralwidget)
+        self.realtime_output = QtGui.QTextEdit(self.centralwidget)#realtime output
         self.realtime_output.setGeometry(QtCore.QRect(80, 70, 641, 100))
         self.realtime_output.setObjectName(_fromUtf8("realtime_output"))
         
         self.pushButton_3 = QtGui.QPushButton(self.centralwidget)#View Summary Button
-        self.pushButton_3.setGeometry(QtCore.QRect(420, 330, 88, 27))
+        self.pushButton_3.setGeometry(QtCore.QRect(420, 180, 88, 27))
         self.pushButton_3.setObjectName(_fromUtf8('pushButton_3'))
         
 
+        self.tone_output = QtGui.QTextEdit(self.centralwidget)#realtime output
+        self.tone_output.setGeometry(QtCore.QRect(80, 380 , 641, 100))
+        self.tone_output.setObjectName(_fromUtf8("tone_output"))
+        self.tone_output.setText('Tone output will be shown here')
+        
         stream.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(stream)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
@@ -98,14 +103,25 @@ class Ui_stream(QtGui.QMainWindow):
         # Disable the button when process starts, and enable it when it finishes
         self.convert_button.clicked.connect(self.callProgram)
         self.process.started.connect(lambda: self.convert_button.setEnabled(False))
-        self.process.finished.connect(lambda: self.convert_button.setEnabled(True))
+        self.process.finished.connect(lambda: self.finished_transcript())
+
+        self.saveButton = QtGui.QPushButton(self.centralwidget)
+        self.saveButton.setGeometry(QtCore.QRect(290, 230, 200, 27))
+        self.saveButton.setObjectName(_fromUtf8("saveButton"))
+        self.saveButton.setText(_translate('saveButton' , 'Save Transcription' , None))
+
 
     def retranslateUi(self, stream):
         stream.setWindowTitle(_translate("stream", "MainWindow", None))
         self.convert_button.setText(_translate("stream", "Start", None))
         self.pushButton_3.setText(_translate('View Summary', 'Summary', None))
-        self.pushButton_3.clicked.connect(lambda:self.browseShow())
 
+    def finished_transcript(self):
+        self.pushButton_3.clicked.connect(lambda:self.browseShow())
+        f = open('tone_output.txt' , 'r')
+        self.tone_output.setText(f.read())
+        f.close()
+        self.convert_button.setEnabled(True)
 
 
 if __name__ == "__main__":
