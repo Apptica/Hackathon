@@ -65,6 +65,11 @@ class Ui_browse(object):
         path_to_file = self.lineEdit.toPlainText()
         output = audio_file_streaming.transcribe_streaming(str(path_to_file))
         self.lineEdit_2.setText(output)
+        f = open('tone_output.txt' , 'r')
+        strs = f.read()
+        print strs
+        self.lineEdit_3.setText(strs)
+        f.close()
 
 
     def setupUi(self, browse):
@@ -136,14 +141,6 @@ class Ui_browse(object):
 
         f.write(str(self.lineEdit_2.toPlainText()))
         ##print str(self.realtime_output.toPlainText())
-
-    def finished_transcript(self):
-        f = open('tone_output.txt' , 'r')
-        str = f.read()
-        print str
-        self.lineEdit_3.setText(str)
-        f.close()
-        self.convert_button.setEnabled(True)
 
 
 if __name__ == '__main__':
