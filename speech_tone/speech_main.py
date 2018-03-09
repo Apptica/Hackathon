@@ -9,7 +9,7 @@ data = speech_google.main()
 
 #data = '''Welcome to the IBM Hackathon hosted in IIIT Jabalpur and this is your host joining you to give live updates about the ongoings here. The participants here are looking very #excited about the contest.'''
 
-print("\n\nFinal Output: \""+data + "\"\n\n")
+#print("\n\nFinal Output: \""+data + "\"\n\n")
 file = open(FINAL_OUTPUT_FILE, "w")
 file.write(data)
 file.close()
@@ -23,10 +23,10 @@ if tone_json.has_key('document_tone') :
 
 file = open(TONE_FILE, "w")
 if not tones == ''  :
-	print('Tones Detected:: \n' + tones)
+	#print('Tones Detected:: \n' + tones)
 	file.write('Tones Detected:: \n' + tones)
 else:
-	print('No Tones Detected.\n')
+	#print('No Tones Detected.\n')
 	file.write('No Tones Detected.\n')
 file.close()
 #parsed = json.loads(tone_json)

@@ -8,6 +8,7 @@
 
 from PyQt4 import QtCore, QtGui
 
+
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -32,9 +33,12 @@ class Ui_MainWindow(object):
         self.textEdit = QtGui.QTextEdit(self.centralwidget)
         self.textEdit.setGeometry(QtCore.QRect(90, 60, 581, 301))
         self.textEdit.setObjectName(_fromUtf8("textEdit"))
+        
         self.pushButton = QtGui.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(290, 380, 161, 27))
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
+        self.pushButton.clicked.connect(lambda:self.saver())
+        
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
@@ -49,7 +53,6 @@ class Ui_MainWindow(object):
         self.textEdit.setText(f.read())
         f.close()
         self.pushButton.setText(_translate("MainWindow", "Save Summary", None))
-        self.pushButton.clicked.connect(lambda:self.saver())
         
 
     def saver(self):
