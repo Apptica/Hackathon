@@ -147,14 +147,15 @@ def listen_print_loop(responses):
 		# some extra spaces to overwrite the previous result
 		overwrite_chars = ' ' * (num_chars_printed - len(transcript))
 
+		global TEXT 
 		if not result.is_final:
-			sys.stdout.write(transcript + overwrite_chars + '\r')
+			sys.stdout.write(TEXT + transcript + overwrite_chars + '\r')
 			sys.stdout.flush()
 
 			num_chars_printed = len(transcript)
 
 		else:
-			print(transcript + overwrite_chars)
+			print(TEXT + transcript + overwrite_chars)
 			
 			# Exit recognition if any of the transcribed phrases could be
 			# one of our keywords.
@@ -162,7 +163,6 @@ def listen_print_loop(responses):
 				print('Exiting Speech Recognizer...')
 				break
 
-			global TEXT 
 			TEXT = TEXT+transcript
 			num_chars_printed = 0
 	
