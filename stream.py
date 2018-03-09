@@ -7,6 +7,27 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+import os
+import sys
+import requests
+import json
+
+def getSummary(text):
+    f = open('summary.txt', 'w')
+    #print (text)
+    text = str(text)
+    r = requests.post(
+        "https://api.deepai.org/api/summarization",
+        data={
+            'text': text,
+        },
+        headers={'api-key': '418a9720-2b4c-4331-90c0-7b6d48236b59'}
+    )
+    print (r)
+    f.write(r.json()['output'])
+    f.close()
+
+from subprocess import call
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -23,6 +44,11 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_stream(QtGui.QMainWindow):
+    def browseShow(self):
+        getSummary(self.realtime_output.toPlainText())
+
+        call(["python2", "summary.py"])
+
     def dataReady(self):
         self.realtime_output.clear()
         cursor = self.realtime_output.textCursor()
@@ -41,12 +67,20 @@ class Ui_stream(QtGui.QMainWindow):
         stream.resize(800, 600)
         self.centralwidget = QtGui.QWidget(stream)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
+        
         self.convert_button = QtGui.QPushButton(self.centralwidget)
-        self.convert_button.setGeometry(QtCore.QRect(360, 330, 88, 27))
+        self.convert_button.setGeometry(QtCore.QRect(260, 330, 88, 27))
         self.convert_button.setObjectName(_fromUtf8("convert_button"))
+        
         self.realtime_output = QtGui.QTextEdit(self.centralwidget)
         self.realtime_output.setGeometry(QtCore.QRect(80, 70, 641, 100))
         self.realtime_output.setObjectName(_fromUtf8("realtime_output"))
+        
+        self.pushButton_3 = QtGui.QPushButton(self.centralwidget)#View Summary Button
+        self.pushButton_3.setGeometry(QtCore.QRect(420, 330, 88, 27))
+        self.pushButton_3.setObjectName(_fromUtf8('pushButton_3'))
+        
+
         stream.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(stream)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
@@ -69,6 +103,9 @@ class Ui_stream(QtGui.QMainWindow):
     def retranslateUi(self, stream):
         stream.setWindowTitle(_translate("stream", "MainWindow", None))
         self.convert_button.setText(_translate("stream", "Start", None))
+        self.pushButton_3.setText(_translate('View Summary', 'Summary', None))
+        self.pushButton_3.clicked.connect(lambda:self.browseShow())
+
 
 
 if __name__ == "__main__":
