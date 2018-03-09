@@ -31,7 +31,7 @@ from __future__ import division
 import re
 import sys
 import os
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="auth.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="speech_tone/auth.json"
 from google.cloud import speech
 from google.cloud.speech import enums
 from google.cloud.speech import types
@@ -147,24 +147,17 @@ def listen_print_loop(responses):
 		# some extra spaces to overwrite the previous result
 		overwrite_chars = ' ' * (num_chars_printed - len(transcript))
 
-<<<<<<< HEAD
-		if not result.is_final:
-			sys.stdout.write(transcript + overwrite_chars + '\r')
-=======
 		global TEXT 
 		if not result.is_final:
 			sys.stdout.write(TEXT + transcript + overwrite_chars + '\r')
->>>>>>> 91f14abb0507ab66c346881cd9fcef2e214db7e1
+
 			sys.stdout.flush()
 
 			num_chars_printed = len(transcript)
 
 		else:
-<<<<<<< HEAD
-			print(transcript + overwrite_chars)
-=======
 			print(TEXT + transcript + overwrite_chars)
->>>>>>> 91f14abb0507ab66c346881cd9fcef2e214db7e1
+
 			
 			# Exit recognition if any of the transcribed phrases could be
 			# one of our keywords.
@@ -172,10 +165,6 @@ def listen_print_loop(responses):
 				print('Exiting Speech Recognizer...')
 				break
 
-<<<<<<< HEAD
-			global TEXT 
-=======
->>>>>>> 91f14abb0507ab66c346881cd9fcef2e214db7e1
 			TEXT = TEXT+transcript
 			num_chars_printed = 0
 	
@@ -186,6 +175,7 @@ def main():
 	global TEXT
 	TEXT=''
 	client = speech.SpeechClient()
+
 	config = types.RecognitionConfig(
 		encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
 		sample_rate_hertz=RATE,
