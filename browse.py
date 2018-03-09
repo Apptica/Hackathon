@@ -47,14 +47,14 @@ class Ui_browse(object):
         self.pushButton.setGeometry(QtCore.QRect(270, 320, 88, 27))
         self.pushButton.setObjectName(_fromUtf8('pushButton'))
         self.lineEdit = QtGui.QLineEdit(self.centralwidget)
-        self.lineEdit.setGeometry(QtCore.QRect(360, 320, 211, 28))
+        self.lineEdit.setGeometry(QtCore.QRect(360, 320, 211, 27))
         self.lineEdit.setText(_fromUtf8(''))
         self.lineEdit.setObjectName(_fromUtf8('lineEdit'))
         self.pushButton_2 = QtGui.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(340, 370, 88, 27))
         self.pushButton_2.setObjectName(_fromUtf8('pushButton_2'))
         self.lineEdit_2 = QtGui.QLineEdit(self.centralwidget)
-        self.lineEdit_2.setGeometry(QtCore.QRect(110, 50, 601, 221))
+        self.lineEdit_2.setGeometry(QtCore.QRect(110, 200, 601, 35))
         self.lineEdit_2.setText(_fromUtf8(''))
         self.lineEdit_2.setObjectName(_fromUtf8('lineEdit_2'))
         browse.setCentralWidget(self.centralwidget)
@@ -72,7 +72,7 @@ class Ui_browse(object):
         self.pushButton.clicked.connect(lambda:self.open())
 
     def open(self):
-    	filename = QtGui.QFileDialog.getOpenFileName(None, 'Open File', os.getenv('HOME'))
+    	filename = QtGui.QFileDialog.getOpenFileName(None, 'Open File', ' ', "Audio files (*.mp3 *.wav *.flac)")
         self.lineEdit.setText(filename)
 
 
