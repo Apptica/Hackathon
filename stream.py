@@ -34,7 +34,7 @@ class Ui_stream(QtGui.QMainWindow):
         # run the process
         # `start` takes the exec and a list of arguments
         self.process.start('python2',['speech_tone/speech_main.py'])
-
+        #self.process.start('ping',['localhost'])
 
     def setupUi(self, stream):
         stream.setObjectName(_fromUtf8("stream"))
